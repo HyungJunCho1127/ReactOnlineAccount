@@ -1,17 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthService } from "../services/AuthService";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
     
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("Login with " + email + ' and password ' + password);
-    if (!email || !password) return;
+    setError(null);
 
-    navigate("/dashboard");
+    const result = AuthService.login(email, password);
+
+    if (!result.ok) {
+      if (result.reason === "ACCOUNT_NOT_FOUND") {
+        setError("Account not found");
+      } else {
+        setError("Incorrect password");
+      }
+      return;
+    }
+
+    navigate(`/dashboard?policy=${result.policyNumber}`);
   }
 
     return(
@@ -34,6 +47,8 @@ export default function Login(){
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
         />
+        {error && (<p style={{ color: "crimson", margin: 0 }}>{error}</p>)}
+        <br/> 
         <button type="submit">Login</button>
         </form>
     );
