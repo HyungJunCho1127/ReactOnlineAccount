@@ -1,0 +1,1 @@
+export type quoteStep = "driver" | "vehicle" | "summary";

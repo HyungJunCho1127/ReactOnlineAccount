@@ -28,6 +28,7 @@ export default function Login(){
   }
 
     return(
+      <div>
         <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         <label htmlFor="email">Email </label>
@@ -49,7 +50,11 @@ export default function Login(){
         />
         {error && (<p style={{ color: "crimson", margin: 0 }}>{error}</p>)}
         <br/> 
+        <br/>
         <button type="submit">Login</button>
         </form>
+        <br/>
+          <button onClick={()=> navigate("/quote/motor")}>Motor Quote</button>
+        </div>
     );
 }

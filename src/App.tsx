@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import Login from './pages/Login'
 import Dashboard from "./pages/Dashboard";
+import MotorQuote from "./pages/MotorQuote";
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/quote/motor" element={<MotorQuote />} />
       </Routes>
     </BrowserRouter>
   )
